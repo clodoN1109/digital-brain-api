@@ -17,18 +17,21 @@ app.use(bodyParser.json());
 app.use(cors());
 
 const db = knex({
-    client: 'postgres',
+    client: 'postgres', 
     connection: {
-      host : '127.0.0.1',
+      host : 'postgres://clodo:9M5jCe2gGTcpAFIMevjtlOwXh3lbTLVz@dpg-cf63ds9mbjsmchdqg5pg-a/digitalbrain',
       port : 5432,
-      user : 'postgres',
-      password : 'dinoage',
-      database : 'smart-brain'
+      user : 'clodo',
+      password : '9M5jCe2gGTcpAFIMevjtlOwXh3lbTLVz',
+      database : 'digitalbrain'
     }
 });
 
 
-app.get("/", (req, res) => {res.json('Connection stablished!')});
+app.get("/", (req, res) => {
+    res.json('Connection stablished!');
+    console.log(db);
+});
 
 // app.get('/database', (req, res)=>{
 //     db.select('*').from('users').then(data => res.json(data));
