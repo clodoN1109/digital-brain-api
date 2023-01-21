@@ -5,7 +5,7 @@
   "main": "server.js",
   "repository": "https://github.com/clodoN1109/digital-brain-api.git",
   "scripts": {
-    "start": "node index.js"
+    "start": "node server.js"
   },
   "author": "Clodo",
   "license": "ISC",
