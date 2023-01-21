@@ -2,7 +2,8 @@
   "name": "digital-brain-api",
   "version": "1.0.0",
   "description": "server for app",
-  "main": "index.js",
+  "main": "server.js",
+  "repository": "https://github.com/clodoN1109/digital-brain-api.git",
   "scripts": {
     "start": "node app.js"
   },
@@ -17,5 +18,10 @@
     "express": "^4.18.2",
     "knex": "^2.4.1",
     "pg": "^8.8.0"
+  },
+  "engines": {
+    "node": ">=14"
   }
+
+
 }

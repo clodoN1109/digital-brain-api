@@ -8,6 +8,8 @@ const signin = require('./controllers/signin');
 
 const app = express();
 
+const port = process.env.PORT || 3001;
+
 //app.use(express.json());
 
 //app.use(bodyParser.urlencoded({extended: false}));
@@ -85,11 +87,5 @@ app.post('/imageurl',(req,res)=>{
 
 })
 
-app.listen(process.env.PORT, ()=>{
 
-    console.log('API is live!');
-    
-
-})
-
-
+app.listen(port, () => console.log(`Example app listening on port ${port}!`));
