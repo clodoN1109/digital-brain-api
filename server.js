@@ -28,6 +28,7 @@ const db = knex({
 });
 
 
+app.get("/", (req, res) => {res.json('Connection stablished!')});
 
 // app.get('/database', (req, res)=>{
 //     db.select('*').from('users').then(data => res.json(data));
