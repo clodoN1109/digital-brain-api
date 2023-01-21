@@ -4,7 +4,7 @@
   "description": "server for app",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start:dev": "nodemon server.js"
   },
   "author": "Clodo",
   "license": "ISC",
