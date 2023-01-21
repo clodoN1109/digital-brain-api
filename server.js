@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
 const knex = require('knex');
+const register = require('./controllers/register');
+const signin = require('./controllers/signin');
 
 const app = express();
 
@@ -25,71 +27,13 @@ const db = knex({
 
 
 
-app.get('/database', (req, res)=>{
-    db.select('*').from('users').then(data => res.json(data));
-})
+// app.get('/database', (req, res)=>{
+//     db.select('*').from('users').then(data => res.json(data));
+// })
 
-app.post('/signin',(req, res)=> {
+app.post('/signin', (req, res) => {signin.handleSignin(req, res, db, bcrypt)})
 
-    db.select('email', 'hash').from('login')
-    .where({'email':req.body.email})
-    .then(data => {
-
-       const isValid = bcrypt.compareSync(req.body.password, data[0].hash);
-       //console.log(isValid); 
-       if (isValid){
-            return db.select('*').from('users').where('email', '=', req.body.email)
-            .then(user => {
-                //console.log(user);
-                res.json(user[0]);
-            }).catch(err => res.status(400).json('Unable to Signin'));
-       }
-       else{res.status(400).json('Wrong credentials')}
-    
-
-    }).catch(err => res.status(400).json('Wrong credentials.'));
-
-
-})
-
-app.post('/register', (req, res)=>{
-
-    let {email, name, favoriteColor, password} = req.body;
-    const hash = bcrypt.hashSync(password);
-
-    db.transaction(trx => {
-
-        trx.insert({
-
-            hash: hash,
-            email: email
-
-        })
-        .into('login')
-        .returning('email')
-        .then(loginEmail => {
-
-            return trx('users').returning('*').insert({
-
-                email: loginEmail[0].email,
-                name: name,
-                color: favoriteColor,
-                joined: new Date
-        
-            }).then(user => {
-        
-                res.json(user[0]);
-        
-            })
-            .then(trx.commit)
-            .catch(trx.rollback);
-
-
-        }).catch(err => res.status(400).json('Unable to register.'))
-        
-    })
-
-})
+app.post('/register', (req, res) => {register.handleRegister(req, res, db, bcrypt)})
 
 app.get('/profile/:id', (req, res) => {
 
@@ -115,6 +59,29 @@ app.put('/image',(req,res)=>{
         res.json(entries[0].entries);
         })
     .catch(err => res.status(400).json('unable to get entries'));
+
+
+})
+
+app.post('/imageurl',(req,res)=>{
+
+    const Clarifai = require('clarifai');
+
+    const app = new Clarifai.App({
+        apiKey: 'b8996a9b4962460e97e5ada5dc67192e'
+    });
+    
+    const {input} = req.body;
+
+    app.models.predict( {
+        id: "a403429f2ddf4b49b307e318f00e528b",
+        version: "34ce21a40cc24b6b96ffee54aabff139",
+    }, input).then(data => {
+
+        res.json(data);
+    })
+    .catch(err => res.status(400).json('Unable to work with API.'));
+
 
 })
 
