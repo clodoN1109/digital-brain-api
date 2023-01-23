@@ -17,13 +17,13 @@ app.use(bodyParser.json());
 app.use(cors());
 
 const db = knex({
-    client: 'postgres', 
+    client: 'pg', 
     connection: {
-      host : 'postgres://clodo:9M5jCe2gGTcpAFIMevjtlOwXh3lbTLVz@dpg-cf63ds9mbjsmchdqg5pg-a/digitalbrain',
-      port : 5432,
-      user : 'clodo',
-      password : '9M5jCe2gGTcpAFIMevjtlOwXh3lbTLVz',
-      database : 'digitalbrain'
+    
+      host: 'dpg-cf63ds9mbjsmchdqg5pg-a',
+      database : 'digitalbrain',
+      user: 'clodo',
+      password : '9M5jCe2gGTcpAFIMevjtlOwXh3lbTLVz'
     }
 });
 
@@ -54,7 +54,8 @@ app.post('/register', (req, res) => {
 
     console.log('req', req.body);
     console.log('hash', hash);
-    console.log('db', db());
+    
+    db.select('*').from('users').then(data => {res.json(data)});
 
 })
 
