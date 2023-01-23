@@ -40,7 +40,23 @@ app.post('/signin', (req, res) => {signin.handleSignin(req, res, db, bcrypt)})
 
 //app.post('/register', (req, res) => {register.handleRegister(req, res, db, bcrypt)})
 
-app.post('/register', (req, res) => {res.json(req.body);})
+app.post('/register', (req, res) => {
+
+    let {email, name, favoriteColor, password} = req.body;
+
+    if (!email || !name || !password){
+
+        return res.status(400).json('incomplete form');
+
+    }
+
+    const hash = bcrypt.hashSync(password);
+
+    res.json(req.body, password);
+
+
+
+})
 
 app.get('/profile/:id', (req, res) => {
 
