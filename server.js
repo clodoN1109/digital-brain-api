@@ -54,7 +54,7 @@ app.post('/register', (req, res) => {
 
     console.log('req', req.body);
     console.log('hash', hash);
-    console.log('db', db);
+    console.log('db', db());
 
 })
 
@@ -109,4 +109,4 @@ app.post('/imageurl',(req,res)=>{
 })
 
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(port, () => console.log(`Digital Brain App is listening on port ${port}!`));
