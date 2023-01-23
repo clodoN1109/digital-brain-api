@@ -52,8 +52,7 @@ app.post('/register', (req, res) => {
 
     const hash = bcrypt.hashSync(password);
 
-    res.json(hash);
-
+    res.json(db);
 
 
 })
