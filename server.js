@@ -9,7 +9,7 @@ const signin = require('./controllers/signin');
 const app = express();
 
 const port = process.env.PORT || 3000;
-//const pass = process.env['DBPASS'];
+const password = process.env['DBPASS'];
 
 //app.use(express.json());
 
@@ -24,7 +24,7 @@ const db = knex({
       host: 'dpg-cf63ds9mbjsmchdqg5pg-a',
       port: 5432,
       user: 'clodo',
-      password : process.env.DBPASS,
+      password : password,
       database : 'digitalbrain'
     }
 });
