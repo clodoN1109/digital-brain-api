@@ -53,9 +53,6 @@ app.post('/register', (req, res) => {
 
     const hash = bcrypt.hashSync(password);
 
-    console.log('req', req.body);
-    console.log('hash', hash);
-    
     //db.select('*').from('users').then(data => {res.json(data)});
 
     db.transaction(trx => {
