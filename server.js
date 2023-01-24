@@ -9,7 +9,8 @@ const signin = require('./controllers/signin');
 const app = express();
 
 const port = process.env.PORT || 3000;
-const password = process.env['DBPASS'];
+console.log(process.env);
+const password = process.env.DBPASS;
 
 //app.use(express.json());
 
