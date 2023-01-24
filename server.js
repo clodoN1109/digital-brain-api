@@ -23,7 +23,7 @@ const db = knex({
       host: 'dpg-cf63ds9mbjsmchdqg5pg-a',
       port: 5432,
       user: 'clodo',
-      password : '9M5jCe2gGTcpAFIMevjtlOwXh3lbTLVz',
+      password : 'process.env.DBPASS',
       database : 'digitalbrain'
     }
 });
